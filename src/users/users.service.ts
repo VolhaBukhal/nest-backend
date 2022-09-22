@@ -26,13 +26,16 @@ export class UsersService {
     return user;
   }
 
-  async getUserById(id: number) {
-    const oneUser = await this.userModel.findOne({ where: { id } });
-    return oneUser;
-  }
-
   async getAllUsers() {
     const users = await this.userModel.findAll({ include: { all: true } });
     return users;
+  }
+
+  async getUserByEmail(email: string) {
+    const user = await this.userModel.findOne({
+      where: { email },
+      include: { all: true },
+    });
+    return user;
   }
 }
